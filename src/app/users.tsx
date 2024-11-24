@@ -22,10 +22,10 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { toast, ToastContainer } from "react-toastify";
 
-const Page = () => {
+const User = () => {
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.user.users);
-  const [selectedUser, setSelectedUser] = useState<any>(null); 
+  const [selectedUser, setSelectedUser] = useState<any>(null); // State for selected user
   const [userData, setUserData] = useState<any>({
     name: "",
     email: "",
@@ -39,7 +39,7 @@ const Page = () => {
 
   const handleEdit = (user: any) => {
     dispatch(fetchUserById(user.id) as any); 
-    setSelectedUser(user); 
+    setSelectedUser(user);
     setUserData({
       name: user.name,
       email: user.email,
@@ -51,18 +51,18 @@ const Page = () => {
 
   const handleClose = () => {
     setOpen(false);
-    setSelectedUser(null);
+    setSelectedUser(null); 
   };
 
   const handleSave = async () => {
     if (selectedUser) {
-      
+     
       await dispatch(updateUser(selectedUser.id, userData) as any);
 
-      
+   
       dispatch(fetchUsers() as any);
 
-   
+  
       handleClose();
     }
   };
@@ -74,7 +74,7 @@ const Page = () => {
   return (
     <div>
       <div className="w-full flex items-start justify-center text-center mb-4 mt-32">
-        <h1 className="text-4xl font-extrabold">List User</h1>
+        <h1 className="text-4xl">List User</h1>
       </div>
       <div className="ml-32 mr-32 mt-24">
         <Table>
@@ -103,6 +103,7 @@ const Page = () => {
         </Table>
       </div>
 
+   
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit User</DialogTitle>
         <DialogContent>
@@ -144,4 +145,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default User;
